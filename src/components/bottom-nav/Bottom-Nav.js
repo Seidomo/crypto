@@ -8,6 +8,7 @@ import store from '../../store/index.js';
 
 const DashboardRoute = () => <Provider store={store()}><Dashboard /></Provider>;
 
+
 const SearchRoute = () => <Text>Search</Text>;
 
 const AccountRoute = () => <Text>Team</Text>;

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^1.4.0",
+    "@react-native-async-storage/async-storage": "^1.13.0",
     "@reduxjs/toolkit": "^1.5.1",
     "auth0-react": "^3.1.0",
     "axios": "^0.21.1",

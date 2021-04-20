@@ -25,13 +25,6 @@ const theme = {
 
 export default function App() {
 
-  useEffect(() => {
-    axios.get("https://api.nomics.com/v1/currencies/ticker?key=911389757c5ae75d545c66e2995f4263&ids=BTC,ETH,XRP&interval=1d,30d&convert=EUR&per-page=100&page=1")
-      .then(response => console.log(response))
-    console.log('yo dawgs')
-  }, []);
-
-
   return (
     <PaperProvider theme={theme}>
       <AuthenticationContextProvider>
