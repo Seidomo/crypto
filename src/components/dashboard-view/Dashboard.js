@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, Button, FlatList, TextInput } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, Text, View, FlatList, TextInput } from 'react-native';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { loadPrices, updateTicker, setTicker } from '../../store/collection.reducer.js';
 import { PromiseProvider } from 'mongoose';
-import { Avatar, Card, Title, Paragraph, IconButton, Surface, Divider } from 'react-native-paper';
+import { Avatar, Card, Title, Paragraph, IconButton, Surface, Divider, Button, Searchbar } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -63,16 +63,23 @@ function Dashboard(props) {
     <View style={styles.container}>
       <View>
         <Text>Add Currency to Collection</Text>
-        <TextInput onChangeText={text => setCurrency(text)} name="ticker"type="text" required></TextInput>
-        <Button onPress={handleSubmit} title="add"/>
+        <Searchbar
+          placeholder="Search"
+          onChangeText=onChangeText={text => setCurrency(text)} 
+          name="ticker"
+          type="text" 
+          required
+          theme={theme.colors.primary}
+        />
+        <Button mode="contained" onPress={() => console.log('Pressed')}>
+        Add Crypto
+        </Button>
       </View>
-      <Card>
         {props.collection.prices.map((price, i) => {
           return <Surface style={stylesTwo.surface} key={i}>
             <Card.Title title={price.currency} subtitle={price.price} left={(props) => <Avatar.Icon {...props} icon="sword-cross" />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => {}} />}/>
             </Surface>
         })}
-      </Card>
       <StatusBar style="auto" />
     </View>
   );
