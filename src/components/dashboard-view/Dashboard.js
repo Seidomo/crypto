@@ -3,26 +3,59 @@ import * as React from 'react';
 import { StyleSheet, Text, View, FlatList, TextInput } from 'react-native';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { loadPrices, add, updateTicker } from '../../store/collection.reducer.js';
+import { loadPrices, updateTicker, setTicker } from '../../store/collection.reducer.js';
 import { PromiseProvider } from 'mongoose';
 import { Avatar, Card, Title, Paragraph, IconButton, Surface, Divider, Button, Searchbar } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 
 function Dashboard(props) {
 
-  const [searchQuery, setSearchQuery] = React.useState('');
+  const [addCurrency, setCurrency] = useState();
 
-  const onChangeSearch = query => setSearchQuery(query);
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('@collection', jsonValue)
+    } catch (e) {
+      // saving error
+    }
+  }
+  
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@collection')
+      console.log('FUNCTION')
+      if(value === null) {
+        console.log('STORE');
+        storeData(['BTC', 'ETH']);
+        props.setTicker(['BTC', 'ETH'])
+      }else{
+        console.log('TICKER');
+        console.log(JSON.parse(value));
+        props.setTicker(JSON.parse(value));
+      }
+    } catch(e) {
+      // error reading value
+    }
+  }
+  
+  useEffect(() => {
+    getData();
+  }, [])
+
+
 
   useEffect(() => {
     props.loadPrices();
   }, [props.collection.currency]);
 
-  const handleSumbit = (e) => {
-    e.preventDefault();
-    console.log(e.target.ticker.value);
-    add(e.target.ticker.value);
-    updateTicker();
+  const handleSubmit = () => {
+    console.log(addCurrency);
+    storeData([...props.collection.currency, addCurrency]);
+    props.updateTicker(addCurrency);
   }
 
 
@@ -32,8 +65,10 @@ function Dashboard(props) {
         <Text>Add Currency to Collection</Text>
         <Searchbar
           placeholder="Search"
-          onChangeText={onChangeSearch}
-          value={searchQuery}
+          onChangeText=onChangeText={text => setCurrency(text)} 
+          name="ticker"
+          type="text" 
+          required
           theme={theme.colors.primary}
         />
         <Button mode="contained" onPress={() => console.log('Pressed')}>
@@ -79,7 +114,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   loadPrices,
-  add,
+  setTicker,
   updateTicker
 }
 
