@@ -15,14 +15,15 @@ class Model{
         }
     }
 
-    async read(_id){
+    
+
+    async readByQuery(query){
         try{
-            let readRecord = await this.schema.findById({_id});
-            return readRecord;
+            let results = await this.schema.find(query);
+            return results;
         }catch(error){
-            console.log('error while reading record', error)
-        }
+            console.log('error while reading by query', error);
     }
 
-
+}
 }

@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import * as React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import Bottom from './components/bottom-nav/Bottom-Nav.js';
-import Dashboard from './components/dashboard-view/Dashboard.js'
 import axios from 'axios';
 
 const theme = {
@@ -16,6 +15,8 @@ const theme = {
     accent: '#f1c40f',
   },
 };
+import Dashboard from './components/dashboard-view/Dashboard.js'
+
 
 
 export default function App() {
