@@ -2,9 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import * as React from 'react';
 import { BottomNavigation } from 'react-native-paper';
-import Dashboard from '../../src/components/dashboard-view/Dashboard.js'
+import Dashboard from '../dashboard-view/Dashboard.js'
 import { Provider } from 'react-redux';
-import store from '../../src/store/index.js';
+import store from '../../store/index.js';
 
 const DashboardRoute = () => <Provider store={store()}><Dashboard /></Provider>;
 
