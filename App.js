@@ -10,6 +10,7 @@ import axios from 'axios';
 import { Provider } from 'react-redux';
 import store from './src/store/index.js';
 import firebase from 'firebase/app'
+import Top from './src/components/top-nav/Top-nav.js'
 
 
 const theme = {
@@ -18,7 +19,9 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#09FF00',
-    accent: '#f1c40f',
+    accent: '#002244',
+    background: '#002244',
+    surface: '#A5acaf',
   },
 };
 
@@ -28,6 +31,7 @@ export default function App() {
   return (
     <PaperProvider theme={theme}>
       <AuthenticationContextProvider>
+      <Top />
       <Bottom>
         <Provider store={store()}>
           <Dashboard />
