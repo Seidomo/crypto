@@ -4,8 +4,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import Dashboard from './src/components/dashboard-view/Dashboard.js'
 import * as React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context"
-import Bottom from './components/bottom-nav/Bottom-Nav.js';
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
+import Bottom from './src/components/bottom-nav/Bottom-Nav.js';
 import axios from 'axios';
 import { Provider } from 'react-redux';
 import store from './src/store/index.js';
@@ -17,7 +17,7 @@ const theme = {
   roundness: 2,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#3498db',
+    primary: '#09FF00',
     accent: '#f1c40f',
   },
 };
