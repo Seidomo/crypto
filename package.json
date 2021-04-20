@@ -8,8 +8,10 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "@auth0/auth0-react": "^1.4.0",
+    "auth0-react": "^3.1.0",
     "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
     "expo": "~41.0.0",
     "expo-status-bar": "~1.0.4",
     "express": "^4.17.1",
