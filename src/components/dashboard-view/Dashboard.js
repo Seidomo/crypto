@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { loadPrices, add } from '../../store/collection.reducer.js';
 import { PromiseProvider } from 'mongoose';
+import { Avatar, Button, Card, Title, Paragraph, IconButton, Surface, Divider } from 'react-native-paper';
 
 function Dashboard(props) {
 
@@ -26,16 +27,29 @@ function Dashboard(props) {
         <input name="ticker"type="text" required></input>
         <button type="submit">Add</button>
       </form>
-      <ul>
+      <Card>
         {props.prices.map((price, i) => {
-          return <li key={i}><span>{price.currency}</span>${price.price}</li>
+          return <Surface style={stylesTwo.surface} key={i}>
+            <Card.Title title={price.currency} subtitle={price.price} left={(props) => <Avatar.Icon {...props} icon="sword-cross" />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => {}} />}/>
+            </Surface>
         })}
-      </ul>
-      <Text>Open up App.js to start working on your app!!!!!!</Text>
+      </Card>
       <StatusBar style="auto" />
     </View>
   );
 }
+
+const stylesTwo = StyleSheet.create({
+  surface: {
+    padding: 8,
+    margin: 10,
+    height: 80,
+    width: 280,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 8,
+  },
+});
 
 const styles = StyleSheet.create({
   container: {
