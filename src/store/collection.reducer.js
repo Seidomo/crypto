@@ -1,38 +1,17 @@
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 let initialState = {
-  currency : ['BTC', 'ETH', 'NMR'],
+  currency : [],
   prices: [],
 }
 
 
-const getData = async () => {
-  try {
-    const value = await AsyncStorage.getItem('@collection')
-    if(value !== null) {
-      console.log(value);
-      return value;
-    }
-  } catch(e) {
-    // error reading value
-  }
-}
 
-const storeData = async (value) => {
-  try {
-    const jsonValue = JSON.stringify(value)
-    await AsyncStorage.setItem('@collection', jsonValue)
-  } catch (e) {
-    // saving error
-  }
-}
 
-// getData().then(response => add(response));
-storeData(initialState.currency);
-getData();
 
-let priceQueryString = initialState.currency.reduce((a,b) => a + ',' + b);
+
+console.log(initialState.currency);
+
 
 export default function collectionReducer(state = initialState, action){
   let { type, payload } = action;
@@ -46,31 +25,49 @@ export default function collectionReducer(state = initialState, action){
     case "ADD_CURRENCY":
       return{
         currency: [...state.currency, payload],
-        prices: [...prices],
+        prices: state.prices,
       };
+      case "SET_INITIAL_CURRENCIES":
+        console.log('REDUCER', payload);
+        return{
+          currency: payload,
+          prices: state.prices,
+        }
       default:
         return state;
   }
 }
 
-export const add = (target) =>{
-  getData()
-  .then(response => {
-    let json = JSON.parse(response);
-    storeData([...json, target]);
-  })
-  console.log(target);
+// export const add = (target) =>{
+//   getData()
+//   .then(response => {
+//     let json = JSON.parse(response);
+//     storeData([...json, target]);
+//   })
+//   console.log(target);
+// }
+
+export const updateTicker = (target) => {
+  return {
+    type: 'ADD_CURRENCY',
+    payload: target
+  }
 }
 
-export const updateTicker = () => (dispatch, getState) => {
-  return dispatch({
-    type: 'ADD_CURRENCY',
-    payload: 'XRP'
-  })
+export const setTicker = (target) => {
+  console.log('SET TICKER FIRED');
+  return{
+    type: 'SET_INITIAL_CURRENCIES',
+    payload: target
+  }
 }
 
 export const loadPrices = () => (dispatch, getState) => {
-  return axios.get(`https://api.nomics.com/v1/currencies/ticker?key=911389757c5ae75d545c66e2995f4263&ids=${priceQueryString}&interval=1d,30d&convert=USD&per-page=100&page=1`)
+
+  console.log(getState());
+  let collection = getState();
+  let priceQueryString = collection.collection.currency.reduce((a,b) => a + ',' + b, '');
+  return axios.get(`https://api.nomics.com/v1/currencies/ticker?key=911389757c5ae75d545c66e2995f4263&ids=${priceQueryString}&interval=1d,30d&convert=USD&per-page=5&page=1`)
     .then(response => {
       dispatch({
         type: 'GET_PRICES',

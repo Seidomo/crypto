@@ -1,24 +1,61 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, TextInput } from 'react-native';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { loadPrices, add, updateTicker } from '../../store/collection.reducer.js';
+import { loadPrices, updateTicker, setTicker } from '../../store/collection.reducer.js';
 import { PromiseProvider } from 'mongoose';
-import { Avatar, Button, Card, Title, Paragraph, IconButton, Surface, Divider } from 'react-native-paper';
+import { Avatar, Card, Title, Paragraph, IconButton, Surface, Divider } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 
 function Dashboard(props) {
+
+  const [addCurrency, setCurrency] = useState();
+
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('@collection', jsonValue)
+    } catch (e) {
+      // saving error
+    }
+  }
+  
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@collection')
+      console.log('FUNCTION')
+      if(value === null) {
+        console.log('STORE');
+        storeData(['BTC', 'ETH']);
+        props.setTicker(['BTC', 'ETH'])
+      }else{
+        console.log('TICKER');
+        console.log(JSON.parse(value));
+        props.setTicker(JSON.parse(value));
+      }
+    } catch(e) {
+      // error reading value
+    }
+  }
+  
+  useEffect(() => {
+    getData();
+  }, [])
+
+
 
   useEffect(() => {
     props.loadPrices();
   }, [props.collection.currency]);
 
-  const handleSumbit = (e) => {
-    e.preventDefault();
-    console.log(e.target.ticker.value);
-    add(e.target.ticker.value);
-    updateTicker();
+  const handleSubmit = () => {
+    console.log(addCurrency);
+    storeData([...props.collection.currency, addCurrency]);
+    props.updateTicker(addCurrency);
   }
 
 
@@ -26,11 +63,11 @@ function Dashboard(props) {
     <View style={styles.container}>
       <View>
         <Text>Add Currency to Collection</Text>
-        <TextInput name="ticker"type="text" required></TextInput>
-        <Button title="add"/>
+        <TextInput onChangeText={text => setCurrency(text)} name="ticker"type="text" required></TextInput>
+        <Button onPress={handleSubmit} title="add"/>
       </View>
       <Card>
-        {props.prices.map((price, i) => {
+        {props.collection.prices.map((price, i) => {
           return <Surface style={stylesTwo.surface} key={i}>
             <Card.Title title={price.currency} subtitle={price.price} left={(props) => <Avatar.Icon {...props} icon="sword-cross" />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => {}} />}/>
             </Surface>
@@ -70,7 +107,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   loadPrices,
-  add,
+  setTicker,
   updateTicker
 }
 
