@@ -1,13 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Dashboard from './src/components/dashboard-view/Dashboard.js'
 import * as React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 import Bottom from './src/components/bottom-nav/Bottom-Nav.js';
 import axios from 'axios';
 import { Provider } from 'react-redux';
 import store from './src/store/index.js';
+import firebase from 'firebase/app'
 
 
 const theme = {
@@ -21,17 +23,18 @@ const theme = {
 };
 
 
-
 export default function App() {
 
   return (
     <PaperProvider theme={theme}>
-        <Bottom>
+      <AuthenticationContextProvider>
+      <Bottom>
         <Provider store={store()}>
-        <Dashboard />
-      </Provider>
+          <Dashboard />
+        </Provider>
 
-        </Bottom>
+      </Bottom>
+      </AuthenticationContextProvider>
     </PaperProvider>
 
   );
