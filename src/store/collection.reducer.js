@@ -67,7 +67,7 @@ export const loadPrices = () => (dispatch, getState) => {
   console.log(getState());
   let collection = getState();
   let priceQueryString = collection.collection.currency.reduce((a,b) => a + ',' + b, '');
-  return axios.get(`https://api.nomics.com/v1/currencies/ticker?key=911389757c5ae75d545c66e2995f4263&ids=${priceQueryString}&interval=1d,30d&convert=USD&per-page=3&page=1`)
+  return axios.get(`https://api.nomics.com/v1/currencies/ticker?key=911389757c5ae75d545c66e2995f4263&ids=${priceQueryString}&interval=1d,30d&convert=USD&per-page=5&page=1`)
     .then(response => {
       dispatch({
         type: 'GET_PRICES',
