@@ -1,10 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Dashboard from './src/components/dashboard-view/Dashboard.js'
 import * as React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import Bottom from './components/bottom-nav/Bottom-Nav.js';
 import axios from 'axios';
+import { Provider } from 'react-redux';
+import store from './src/store/index.js';
+
 
 const theme = {
   ...DefaultTheme,
@@ -15,7 +19,6 @@ const theme = {
     accent: '#f1c40f',
   },
 };
-import Dashboard from './components/dashboard-view/Dashboard.js'
 
 
 
@@ -30,10 +33,13 @@ export default function App() {
   return (
     <PaperProvider theme={theme}>
         <Bottom>
+        <Provider store={store()}>
         <Dashboard />
+      </Provider>
 
         </Bottom>
     </PaperProvider>
+
   );
 }
 
