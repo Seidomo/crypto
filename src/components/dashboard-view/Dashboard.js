@@ -8,6 +8,8 @@ import { PromiseProvider } from 'mongoose';
 import { Avatar, Card, Title, Paragraph, IconButton, Surface, Divider, Button, Searchbar, Dialog, Portal, DataTable, Modal } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {SvgUri} from 'react-native-svg';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 
 function Dashboard(props) {
@@ -94,7 +96,12 @@ function Dashboard(props) {
           <Button onPress={showDialog}>Details</Button>
           <Portal>
             <Dialog visible={visible} onDismiss={hideDialog}>
-
+              <LinearGradient
+              colors={['#09FF00', '#A5acaf', ]}
+              style={styles.background}
+              start={{ x: 0, y: 0}}
+              end={{ x: 1, y: 1 }}
+              >
               <Dialog.ScrollArea style={stylesThree.container}>
                 <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
                 <Title>{price.name} - ${price.currency}</Title>
@@ -134,6 +141,7 @@ function Dashboard(props) {
                   </Dialog.Actions>
                 </ScrollView>
               </Dialog.ScrollArea>
+              </LinearGradient>
             </Dialog>
           </Portal>
         </Surface>
