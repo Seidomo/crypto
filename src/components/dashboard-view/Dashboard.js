@@ -15,8 +15,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 function Dashboard(props) {
 
   const [visible, setVisible] = useState(false);
-  const [modalInformation, setModal] = useState({name:''});
-
+  const [modalInformation, setModal] = useState([{name:''}]);
+  console.log(modalInformation);
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
