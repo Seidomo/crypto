@@ -31,14 +31,10 @@ function Dashboard(props) {
 
     try {
       const value = await AsyncStorage.getItem('@collection')
-      console.log('FUNCTION')
-      if (value === null) {
-        console.log('STORE');
+      if(value === null) {
         storeData(['BTC', 'ETH']);
         props.setTicker(['BTC', 'ETH'])
-      } else {
-        console.log('TICKER');
-        console.log(JSON.parse(value));
+      }else{
         props.setTicker(JSON.parse(value));
       }
     } catch (e) {
@@ -53,13 +49,20 @@ function Dashboard(props) {
 
 
   useEffect(() => {
-    props.loadPrices();
+    if(props.collection.currency.length > 0){
+      props.loadPrices();
+    }
   }, [props.collection.currency]);
 
   const handleSubmit = () => {
-    console.log(addCurrency);
     storeData([...props.collection.currency, addCurrency]);
     props.updateTicker(addCurrency);
+  }
+
+  const deleteItem = (target) => {
+    let newCollection = props.collection.currency.filter(currency => currency !== target);
+    storeData(newCollection);
+    props.setTicker(newCollection);
   }
 
 
@@ -70,7 +73,7 @@ function Dashboard(props) {
         <Text>Add Currency to Collection</Text>
         <Searchbar
           placeholder="Search"
-          onChangeText={text => setCurrency(text)}
+          onChangeText={text => setCurrency(text)} 
           name="ticker"
           type="text"
           required
