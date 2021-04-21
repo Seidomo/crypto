@@ -1,3 +1,4 @@
+/* 
 import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack"
 
@@ -13,5 +14,5 @@ export const AccountNavigator = () => (
     <Stack.Screen name="Login" component={LoginScreen} />
     <Stack.Screen name="Register" component={RegisterScreen} />
   </Stack.Navigator>
-)
-
+) 
+*/
