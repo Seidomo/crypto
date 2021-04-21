@@ -16,6 +16,7 @@
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "expo": "~41.0.0",
+    "expo-linear-gradient": "~9.1.0",
     "expo-status-bar": "~1.0.4",
     "express": "^4.17.1",
     "firebase": "8.2.3",
