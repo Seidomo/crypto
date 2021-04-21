@@ -79,7 +79,7 @@ function Dashboard(props) {
       </View>
         {props.collection.prices.map((price, i) => {
           return <Surface style={stylesTwo.surface} key={i}>
-            <Card.Title title={price.currency} subtitle={price.price} left={(props) => <Avatar.Image size={40} source={{uri: price.logo_url}} />} right={(props) => <IconButton onPress={() => deleteItem(price.currency)} {...props} icon="trash-can-outline" />}/>
+            <Card.Title title={price.currency} subtitle={price.price} left={(props) => <Avatar.Image size={40} source={{uri: price.logo_url}} />} right={(props) => <IconButton onPress={() => deleteItem(price.currency)} {...props} icon="trash-can-outline" color={ '#DE5347'} />}/>
             </Surface>
         })}
       <StatusBar style="auto" />
