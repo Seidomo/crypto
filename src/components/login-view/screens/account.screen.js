@@ -1,4 +1,3 @@
-
 import React from "react";
 
 import {
@@ -6,13 +5,33 @@ import {
   AccountContainer,
   AccountCover,
   AuthButton,
+  Title,
 } from "../components/account.styles";
 
-export const AccountScreen = () => {
-  return <AccountBackground>
-    <AccountCover />
-    <AccountContainer>
-      <AuthButton title="login" />
-    </AccountContainer>
-  </AccountBackground>;
+export const AccountScreen = ({ navigation }) => {
+  return (
+    <AccountBackground>
+      <AccountCover />
+      <Title>Crypto</Title>
+
+      <AccountContainer>
+        <AuthButton
+          icon="lock-open-outline"
+          mode="contained"
+          onPress={() => navigation.navigate("Login")}
+        >
+          Login
+        </AuthButton>
+
+          <AuthButton
+            icon="email"
+            mode="contained"
+            onPress={() => navigation.navigate("Register")}
+          >
+            Register
+          </AuthButton>
+
+      </AccountContainer>
+    </AccountBackground>
+  );
 };

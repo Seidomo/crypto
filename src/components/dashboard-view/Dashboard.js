@@ -65,11 +65,10 @@ function Dashboard(props) {
         <Text>Add Currency to Collection</Text>
         <Searchbar
           placeholder="Search"
-          onChangeText=onChangeText={text => setCurrency(text)} 
+          onChangeText={text => setCurrency(text)} 
           name="ticker"
           type="text" 
           required
-          theme={theme.colors.primary}
         />
         <Button mode="contained" onPress={() => console.log('Pressed')}>
         Add Crypto
