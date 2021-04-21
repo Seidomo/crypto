@@ -78,13 +78,13 @@ function Dashboard(props) {
           type="text"
           required
         />
-        <Button mode="contained" onPress={() => handleSubmit}>
+        <Button mode="contained" onPress={handleSubmit}>
           Add Crypto
         </Button>
       </View>
       {props.collection.prices.map((price, i) => {
         return <Surface style={stylesTwo.surface} key={i}>
-          <Card.Title title={price.currency} subtitle={price.price} left={(props) => <Avatar.Icon {...props} icon="sword-cross" />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => { }} />} />
+          <Card.Title title={price.currency} subtitle={price.price} left={(props) => <Avatar.Icon {...props} icon="sword-cross" />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={deleteItem(price.currency)} />} />
           <Button onPress={showDialog}>${price.currency} Details</Button>
           <Portal>
             {console.log(price.currency)}
