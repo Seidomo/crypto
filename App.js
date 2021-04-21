@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 import Dashboard from './src/components/dashboard-view/Dashboard.js'
 import * as React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
@@ -35,12 +35,11 @@ export default function App() {
 
     <PaperProvider theme={theme}>
       <AuthenticationContextProvider>
-      <Top />
+      <Top />  
       <Bottom>
         <Provider store={store()}>
           <Dashboard />
         </Provider>
-
       </Bottom>
       </AuthenticationContextProvider>
     </PaperProvider>
