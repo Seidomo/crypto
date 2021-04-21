@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { StyleSheet, Text, View, FlatList, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TextInput, ScrollView, Image } from 'react-native';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { loadPrices, updateTicker, setTicker } from '../../store/collection.reducer.js';
 import { PromiseProvider } from 'mongoose';
 import { Avatar, Card, Title, Paragraph, IconButton, Surface, Divider, Button, Searchbar, Dialog, Portal, DataTable, Modal } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {SvgUri} from 'react-native-svg';
 
 
 function Dashboard(props) {
@@ -85,11 +86,12 @@ function Dashboard(props) {
       <ScrollView style={styles.scrollView}>
       {props.collection.prices.map((price, i) => {
         return <Surface style={stylesTwo.surface} key={i}>
-          <Card.Title title={price.currency} subtitle={price.name} left={(props) => <Avatar.Image source={{uri: price.logo_url}}{...props} />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => deleteItem(price.currency)} />} />
-          <Button onPress={showDialog} >${price.currency} Details</Button>
+
+          <Card.Title title={price.currency} subtitle={price.price} left={(props) => <SvgUri uri={price.logo_url} height="40" width="40" />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => deleteItem(price.currency)} />} />
+          <Button onPress={showDialog}>${price.currency} Details</Button>
           <Portal>
-            {console.log(price.currency)}
-            <Dialog visible={visible} onDismiss={hideDialog} transparent={true}>
+            <Dialog visible={visible} onDismiss={hideDialog}>
+
               <Dialog.ScrollArea style={stylesThree.container}>
                 <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
                 <Title>{price.name} - ${price.currency}</Title>
