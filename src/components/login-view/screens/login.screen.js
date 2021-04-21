@@ -1,21 +1,22 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, Text } from 'react';
+import { Colors, Button } from 'react-native-paper';
 
 import {
   AccountBackground,
   AccountCover,
   AccountContainer,
-  AuthButton,
   AuthInput,
   ErrorContainer,
   Title,
 } from "../components/account.styles";
 
-import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+
+import { AuthenticationContext } from '../../../services/authentication/authentication.context';
 
 export const LoginScreen = ({ navigation }) => {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const { onLogin, error } = useContext(AuthenticationContext);
 
   return (
@@ -23,7 +24,7 @@ export const LoginScreen = ({ navigation }) => {
       <AccountCover />
       <Title>Crypto</Title>
       <AccountContainer>
-        
+
         <AuthInput
           label="E-mail"
           value={email}
@@ -33,35 +34,35 @@ export const LoginScreen = ({ navigation }) => {
           onChangeText={(u) => setEmail(u)}
         />
 
-          <AuthInput
-            label="Password"
-            value={password}
-            textContentType="password"
-            secureTextEntry
-            autoCapitalize="none"
-            onChangeText={(p) => setPassword(p)}
-          />
-          
+        <AuthInput
+          label="Password"
+          value={password}
+          textContentType="password"
+          secureTextEntry
+          autoCapitalize="none"
+          onChangeText={(p) => setPassword(p)}
+        />
+
 
         {error && (
           <ErrorContainer size="large">
-            <Text variant="error">{error}</Text>
+            <Text>{error}</Text>
           </ErrorContainer>
         )}
 
 
-          <AuthButton
-            icon="lock-open-outline"
-            mode="contained"
-            onPress={() => onLogin(email, password)}
-          >
-            Login
-          </AuthButton>
+        <Button
+          icon="lock-open-outline"
+          mode="contained"
+          onPress={() => onLogin(email, password)}
+        >
+          Login
+          </Button>
 
       </AccountContainer>
-        <AuthButton mode="contained" onPress={() => navigation.goBack()}>
-          Back
-        </AuthButton>
+      <Button mode="contained" onPress={() => navigation.goBack()}>
+        Back
+        </Button>
 
     </AccountBackground>
   );

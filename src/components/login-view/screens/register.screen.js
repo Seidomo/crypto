@@ -1,4 +1,6 @@
 import React, { useState, useContext } from "react";
+import { Colors, Button } from 'react-native-paper';
+import { Text, View } from "react-native";
 
 import {
   AccountBackground,
@@ -24,7 +26,6 @@ export const RegisterScreen = ({ navigation }) => {
       <AccountCover />
       <Title>Crypto</Title>
       <AccountContainer>
-        
         <AuthInput
           label="E-mail"
           value={email}
@@ -35,34 +36,42 @@ export const RegisterScreen = ({ navigation }) => {
         />
 
           <AuthInput
-            label="Repeated Password"
+            label="Password"
+            value={password}
+            textContentType="password"
+            secureTextEntry
+            autoCapitalize="none"
+            onChangeText={(p) => setPassword(p)}
+          />
+
+          <AuthInput
+            label="Repeat Password"
             value={repeatedPassword}
             textContentType="password"
             secureTextEntry
             autoCapitalize="none"
             onChangeText={(p) => setRepeatedPassword(p)}
           />
-          
 
         {error && (
           <ErrorContainer size="large">
-            <Text variant="error">{error}</Text>
+            <Text>{error}</Text>
           </ErrorContainer>
         )}
 
 
-          <AuthButton
+          <Button
             icon="lock-open-outline"
             mode="contained"
             onPress={() => onRegister(email, password, repeatedPassword)}
           >
             Login
-          </AuthButton>
+          </Button>
 
       </AccountContainer>
-        <AuthButton mode="contained" onPress={() => navigation.goBack()}>
+        <Button mode="contained" onPress={() => navigation.goBack()}>
           Back
-        </AuthButton>
+        </Button>
 
     </AccountBackground>
   );

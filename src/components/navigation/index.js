@@ -1,18 +1,20 @@
-// import React, { useContext } from "react";
-// import { NavigationContainer } from "@react-navigation/native";
+import React, { useContext } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { Text } from 'react-native';
 
-// /* import { AppNavigator } from "./app.navigator"; */
-// import { AccountNavigator } from "./account.navigator";
-// import { AuthenticationContext } from "../../services/authentication/authentication.context";
+import { AccountNavigator } from "./account.navigator";
+import { AuthenticationContext } from "../../services/authentication/authentication.context";
 
-// export const Navigation = () => {
-//   const { isAuthenticated } = useContext(AuthenticationContext);
+export const Navigation = () => {
+  const { isAuthenticated, user } = useContext(AuthenticationContext);
 
-//   return (
-//     <NavigationContainer>
-//       {isAuthenticated ? <AccountNavigator /> : <AccountNavigator />}
-//     </NavigationContainer>
-//   );
-// };
+  return (
+    <NavigationContainer>
+      {console.log(isAuthenticated)}
+      {console.log(user)}
+      {isAuthenticated ? <Text>YOU ARE AUTHORIZED</Text> : <AccountNavigator />}
+    </NavigationContainer>
+  );
+};
 
 
