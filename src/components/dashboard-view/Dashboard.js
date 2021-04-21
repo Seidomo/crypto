@@ -14,6 +14,10 @@ function Dashboard(props) {
 
   const [visible, setVisible] = useState(false);
 
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
 
@@ -69,7 +73,6 @@ function Dashboard(props) {
 
   return (
     <View style={styles.container}>
-
       <View>
         <Text>Add Currency to Collection</Text>
         <Searchbar
@@ -87,8 +90,8 @@ function Dashboard(props) {
       {props.collection.prices.map((price, i) => {
         return <Surface style={stylesTwo.surface} key={i}>
 
-          <Card.Title title={price.currency} subtitle={price.price} left={(props) => <SvgUri uri={price.logo_url} height="40" width="40" />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => deleteItem(price.currency)} />} />
-          <Button onPress={showDialog}>${price.currency} Details</Button>
+          <Card.Title titleNumberOfLines="3" title={'$' + numberWithCommas(Number(price.price).toFixed(2))+ "\n" + price.currency}  left={(props) => <SvgUri uri={price.logo_url} height="40" width="40" />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => deleteItem(price.currency)} />} />
+          <Button onPress={showDialog}>Details</Button>
           <Portal>
             <Dialog visible={visible} onDismiss={hideDialog}>
 
