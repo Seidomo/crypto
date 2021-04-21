@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { StyleSheet, Text, View, FlatList, TextInput } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TextInput} from 'react-native';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { loadPrices, updateTicker, setTicker } from '../../store/collection.reducer.js';
@@ -27,14 +27,10 @@ function Dashboard(props) {
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('@collection')
-      console.log('FUNCTION')
       if(value === null) {
-        console.log('STORE');
         storeData(['BTC', 'ETH']);
         props.setTicker(['BTC', 'ETH'])
       }else{
-        console.log('TICKER');
-        console.log(JSON.parse(value));
         props.setTicker(JSON.parse(value));
       }
     } catch(e) {
@@ -49,13 +45,20 @@ function Dashboard(props) {
 
 
   useEffect(() => {
-    props.loadPrices();
+    if(props.collection.currency.length > 0){
+      props.loadPrices();
+    }
   }, [props.collection.currency]);
 
   const handleSubmit = () => {
-    console.log(addCurrency);
     storeData([...props.collection.currency, addCurrency]);
     props.updateTicker(addCurrency);
+  }
+
+  const deleteItem = (target) => {
+    let newCollection = props.collection.currency.filter(currency => currency !== target);
+    storeData(newCollection);
+    props.setTicker(newCollection);
   }
 
 
@@ -69,15 +72,14 @@ function Dashboard(props) {
           name="ticker"
           type="text" 
           required
-          
         />
-        <Button mode="contained" onPress={() => console.log('Pressed')}>
+        <Button mode="contained" onPress={handleSubmit}>
         Add Crypto
         </Button>
       </View>
         {props.collection.prices.map((price, i) => {
           return <Surface style={stylesTwo.surface} key={i}>
-            <Card.Title title={price.currency} subtitle={price.price} left={(props) => <Avatar.Image size={22} source={{ uri: price.logo_url}} />} right={(props) => <IconButton {...props} icon="trash-can-outline" color={ '#DE5347'} onPress={() => {}} />}/>
+            <Card.Title title={price.currency} subtitle={price.price} left={(props) => <Avatar.Image size={40} source={{uri: price.logo_url}} />} right={(props) => <IconButton onPress={() => deleteItem(price.currency)} {...props} icon="trash-can-outline" color={ '#DE5347'} />}/>
             </Surface>
         })}
       <StatusBar style="auto" />
