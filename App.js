@@ -47,12 +47,7 @@ export default function App() {
 
     <PaperProvider theme={theme}>
       <AuthenticationContextProvider>
-      <Top />  
-      <Bottom>
-        <Provider store={store()}>
-          <Dashboard />
-        </Provider>
-      </Bottom>
+        <Navigation/>
       </AuthenticationContextProvider>
     </PaperProvider>
 
