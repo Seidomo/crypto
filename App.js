@@ -14,7 +14,7 @@ import 'firebase/firestore';
 import 'firebase/auth';
 import Top from './src/components/top-nav/Top-nav.js'
 import { Navigation } from './src/components/navigation/index.js';
-import { NavigationContainer } from "@react-navigation/native";
+// import { NavigationContainer } from "@react-navigation/native";
 
 const theme = {
   ...DefaultTheme,
