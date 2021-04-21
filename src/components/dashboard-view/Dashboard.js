@@ -65,11 +65,11 @@ function Dashboard(props) {
         <Text>Add Currency to Collection</Text>
         <Searchbar
           placeholder="Search"
-          onChangeText=onChangeText={text => setCurrency(text)} 
+          onChangeText={text => setCurrency(text)} 
           name="ticker"
           type="text" 
           required
-          theme={theme.colors.primary}
+          
         />
         <Button mode="contained" onPress={() => console.log('Pressed')}>
         Add Crypto
@@ -77,7 +77,7 @@ function Dashboard(props) {
       </View>
         {props.collection.prices.map((price, i) => {
           return <Surface style={stylesTwo.surface} key={i}>
-            <Card.Title title={price.currency} subtitle={price.price} left={(props) => <Avatar.Icon {...props} icon="sword-cross" />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => {}} />}/>
+            <Card.Title title={price.currency} subtitle={price.price} left={(props) => <Avatar.Image size={22} source={{ uri: price.logo_url}} />} right={(props) => <IconButton {...props} icon="trash-can-outline" color={ '#DE5347'} onPress={() => {}} />}/>
             </Surface>
         })}
       <StatusBar style="auto" />
