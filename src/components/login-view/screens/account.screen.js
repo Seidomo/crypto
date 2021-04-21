@@ -1,4 +1,6 @@
 import React from "react";
+import { Colors, Button } from 'react-native-paper';
+import { Text, View } from "react-native";
 
 import {
   AccountBackground,
@@ -15,21 +17,21 @@ export const AccountScreen = ({ navigation }) => {
       <Title>Crypto</Title>
 
       <AccountContainer>
-        <AuthButton
-          icon="lock-open-outline"
-          mode="contained"
-          onPress={() => navigation.navigate("Login")}
+        <Button
+/*           icon="lock-open-outline"
+          mode="contained" */
+          onPress={() => navigation.navigate('Login')}
         >
           Login
-        </AuthButton>
+        </Button>
 
-          <AuthButton
-            icon="email"
-            mode="contained"
-            onPress={() => navigation.navigate("Register")}
+          <Button
+/*             icon="email"
+            mode="contained" */
+            onPress={() => navigation.navigate('Register')}
           >
             Register
-          </AuthButton>
+          </Button>
 
       </AccountContainer>
     </AccountBackground>

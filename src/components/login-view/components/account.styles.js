@@ -1,5 +1,6 @@
-import styled from "styled-components/native";
-import { Button, TextInput } from "react-native-paper";
+import styled from 'styled-components/native';
+import { Button, TextInput } from 'react-native-paper';
+import { Text, View } from 'react-native';
 
 export const AccountBackground = styled.ImageBackground.attrs({
   source: require("../../../../assets/coinsv.jpg"),
@@ -23,7 +24,7 @@ export const AccountContainer = styled.View`
 `;
 
 export const AuthButton = styled.Button`
-  color: #0062ff,
+  color: #0062ff;
   padding: 32px;
 `
 
