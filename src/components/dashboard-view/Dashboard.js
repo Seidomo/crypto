@@ -13,12 +13,17 @@ import {SvgUri} from 'react-native-svg';
 function Dashboard(props) {
 
   const [visible, setVisible] = useState(false);
+  const [modalInformation, setModal] = useState({name:''});
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  const showDialog = () => setVisible(true);
+  const showDialog = (name) => {
+    let target = props.collection.prices.filter(crypto => crypto.currency === name);
+    setModal(target);
+    setVisible(true)
+  };
   const hideDialog = () => setVisible(false);
 
   const [addCurrency, setCurrency] = useState();
@@ -89,15 +94,16 @@ function Dashboard(props) {
       <ScrollView style={styles.scrollView}>
       {props.collection.prices.map((price, i) => {
         return <Surface style={stylesTwo.surface} key={i}>
-
-          <Card.Title titleNumberOfLines="3" title={'$' + numberWithCommas(Number(price.price).toFixed(2))+ "\n" + price.currency}  left={(props) => <SvgUri uri={price.logo_url} height="40" width="40" />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => deleteItem(price.currency)} />} />
-          <Button onPress={showDialog}>Details</Button>
+          <Card.Title titleNumberOfLines={3} title={'$' + numberWithCommas(Number(price.price).toFixed(2))+ "\n" + price.currency}  left={(props) => <SvgUri uri={price.logo_url} height="40" width="40" />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => deleteItem(price.currency)} />} />
+          <Button onPress={() => showDialog(price.currency)}>Details</Button>
+          </Surface>
+        })}
           <Portal>
             <Dialog visible={visible} onDismiss={hideDialog}>
 
               <Dialog.ScrollArea style={stylesThree.container}>
                 <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
-                <Title>{price.name} - ${price.currency}</Title>
+                <Title>{modalInformation[0].name} - {modalInformation[0].currency}</Title>
                   <DataTable>
                     <DataTable.Header>
                       <DataTable.Title>STATS</DataTable.Title>
@@ -105,29 +111,33 @@ function Dashboard(props) {
                     </DataTable.Header>
 
                     <DataTable.Row>
-                      <DataTable.Cell>Market Cap</DataTable.Cell>
-                      <DataTable.Cell>{price.rank}</DataTable.Cell>
+                      <DataTable.Cell>Rank</DataTable.Cell>
+                      <DataTable.Cell>{modalInformation[0].rank}</DataTable.Cell>
                     </DataTable.Row>
 
                     <DataTable.Row>
                       <DataTable.Cell>Price</DataTable.Cell>
-                      <DataTable.Cell>{price.price}</DataTable.Cell>
+                      <DataTable.Cell>{numberWithCommas(Number(modalInformation[0].price).toFixed(2))}</DataTable.Cell>
                     </DataTable.Row>
 
                     <DataTable.Row>
-                      <DataTable.Cell>Volume</DataTable.Cell>
-                       <DataTable.Cell>{price.circulating_supply}</DataTable.Cell>
+                      <DataTable.Cell>30 Day High</DataTable.Cell>
+                      <DataTable.Cell>{numberWithCommas(Number(modalInformation[0].high).toFixed(2))}</DataTable.Cell>
                     </DataTable.Row>
 
-                    <DataTable.Row>
-                      <DataTable.Cell>Day High</DataTable.Cell>
-                      <DataTable.Cell>{price.high}</DataTable.Cell>
-                    </DataTable.Row>
 
                     <DataTable.Row>
-                      <DataTable.Cell>Day Low</DataTable.Cell>
-                      <DataTable.Cell>{price.price}</DataTable.Cell>
+                      <DataTable.Cell>Market Cap</DataTable.Cell>
+                      <DataTable.Cell>{numberWithCommas(Number(modalInformation[0].market_cap).toFixed(0))}</DataTable.Cell>
                     </DataTable.Row>
+
+
+                    <DataTable.Row>
+                      <DataTable.Cell>Circulating Supply</DataTable.Cell>
+                       <DataTable.Cell>{numberWithCommas(Number(modalInformation[0].circulating_supply).toFixed(0))}</DataTable.Cell>
+                    </DataTable.Row>
+
+
                   </DataTable>
                   <Dialog.Actions>
                     <Button onPress={hideDialog}>Done</Button>
@@ -136,8 +146,6 @@ function Dashboard(props) {
               </Dialog.ScrollArea>
             </Dialog>
           </Portal>
-        </Surface>
-      })}
       <StatusBar style="auto" />
       </ScrollView>
     </View>
