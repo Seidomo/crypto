@@ -5,9 +5,8 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { loadPrices, updateTicker, setTicker } from '../../store/collection.reducer.js';
 import { PromiseProvider } from 'mongoose';
-import { Card, Title, Paragraph, IconButton, Surface, Divider, Button, Searchbar, Dialog, Portal, DataTable } from 'react-native-paper';
+import { Avatar, Card, Title, Paragraph, IconButton, Surface, Divider, Button, Searchbar, Dialog, Portal, DataTable, Modal } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Avatar } from 'react-native-elements';
 import {SvgUri} from 'react-native-svg';
 
 
@@ -84,12 +83,15 @@ function Dashboard(props) {
           Add Crypto
         </Button>
       </View>
+      <ScrollView style={styles.scrollView}>
       {props.collection.prices.map((price, i) => {
         return <Surface style={stylesTwo.surface} key={i}>
+
           <Card.Title title={price.currency} subtitle={price.price} left={(props) => <SvgUri uri={price.logo_url} height="40" width="40" />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => deleteItem(price.currency)} />} />
           <Button onPress={showDialog}>${price.currency} Details</Button>
           <Portal>
             <Dialog visible={visible} onDismiss={hideDialog}>
+
               <Dialog.ScrollArea style={stylesThree.container}>
                 <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
                 <Title>{price.name} - ${price.currency}</Title>
@@ -134,6 +136,7 @@ function Dashboard(props) {
         </Surface>
       })}
       <StatusBar style="auto" />
+      </ScrollView>
     </View>
   );
 }
