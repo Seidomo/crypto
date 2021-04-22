@@ -1,5 +1,9 @@
+// Auth and login functions adapted from Udemy Course: Complete React Native in 2021 by Andrei Neagoie and Mo Binni
+// https://www.udemy.com/course/complete-react-native-mobile-development-zero-to-mastery-with-hooks/
+// https://www.udemy.com/user/andrei-neagoie/
+// https://www.udemy.com/user/mo-binni/
+
 import React from 'react';
-import { Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack"
 
 import { AccountScreen } from '../login-view/screens/account.screen'

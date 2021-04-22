@@ -1,15 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { StyleSheet, Text, View, FlatList, TextInput, ScrollView, Image } from 'react-native';
-import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { loadPrices, updateTicker, setTicker } from '../../store/collection.reducer.js';
-import { PromiseProvider } from 'mongoose';
-import { Avatar, Card, Title, Paragraph, IconButton, Surface, Divider, Button, Searchbar, Dialog, Portal, DataTable, Modal } from 'react-native-paper';
+import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {SvgUri} from 'react-native-svg';
+import { StatusBar } from 'expo-status-bar';
+import { SvgUri } from 'react-native-svg';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Card, Title, IconButton, Surface, Button, Searchbar, Dialog, Portal, DataTable } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 
+import { loadPrices, updateTicker, setTicker } from '../../store/collection.reducer.js';
 
 
 function Dashboard(props) {
