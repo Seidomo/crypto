@@ -11,6 +11,12 @@ export default function collectionReducer(state = initialState, action){
 
   switch(type){
     case "GET_PRICES":
+      payload.map(price => { 
+        if(!price.logo_url){
+          price.logo_url = '';
+        }
+        return price;
+      })
       return {
         currency: state.currency,
         prices: payload,
