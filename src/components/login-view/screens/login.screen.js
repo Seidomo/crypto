@@ -1,5 +1,6 @@
-import React, { useState, useContext, Text } from 'react';
+import React, { useState, useContext } from 'react';
 import { Colors, Button } from 'react-native-paper';
+import { Text, View } from "react-native";
 
 import {
   AccountBackground,
