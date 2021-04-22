@@ -1,12 +1,13 @@
+// Auth and login functions adapted from Udemy Course: Complete React Native in 2021 by Andrei Neagoie and Mo Binni
+// https://www.udemy.com/course/complete-react-native-mobile-development-zero-to-mastery-with-hooks/
+
 import React from "react";
-import { Colors, Button } from 'react-native-paper';
-import { Text, View } from "react-native";
+import { Button } from 'react-native-paper';
 
 import {
   AccountBackground,
   AccountContainer,
   AccountCover,
-  AuthButton,
   Title,
 } from "../components/account.styles";
 
@@ -18,16 +19,12 @@ export const AccountScreen = ({ navigation }) => {
 
       <AccountContainer>
         <Button
-/*           icon="lock-open-outline"
-          mode="contained" */
           onPress={() => navigation.navigate('Login')}
         >
           Login
         </Button>
 
           <Button
-/*             icon="email"
-            mode="contained" */
             onPress={() => navigation.navigate('Register')}
           >
             Register

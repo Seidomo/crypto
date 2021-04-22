@@ -1,6 +1,9 @@
+// Auth and login functions adapted from Udemy Course: Complete React Native in 2021 by Andrei Neagoie and Mo Binni
+// https://www.udemy.com/course/complete-react-native-mobile-development-zero-to-mastery-with-hooks/
+
 import styled from 'styled-components/native';
-import { Button, TextInput } from 'react-native-paper';
-import { Text, View } from 'react-native';
+import { TextInput } from 'react-native-paper';
+import { Text } from 'react-native';
 
 export const AccountBackground = styled.ImageBackground.attrs({
   source: require("../../../../assets/levi-midnight-2OuUx9VDl74-unsplash.jpg")
@@ -9,7 +12,6 @@ export const AccountBackground = styled.ImageBackground.attrs({
   align-items: center;
   justify-content: center;
 `;
-
 
 export const AccountCover = styled.View`
   position: absolute;

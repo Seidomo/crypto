@@ -1,5 +1,5 @@
-import React, { useState, useContext, Text } from 'react';
-import { Colors, Button } from 'react-native-paper';
+import React, { useContext } from 'react';
+import { Button } from 'react-native-paper';
 
 import {
   AccountBackground,
@@ -8,7 +8,7 @@ import {
   Title,
 } from '../login-view/components/account.styles';
 
-import { AuthenticationContext } from '../../services/authentication/authentication.context';
+import { AuthenticationContext } from '../authentication/authentication.context';
 
 export const LogOut = () => {
 

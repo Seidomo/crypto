@@ -1,6 +1,10 @@
+// Auth and login functions adapted from Udemy Course: Complete React Native in 2021 by Andrei Neagoie and Mo Binni
+// https://www.udemy.com/course/complete-react-native-mobile-development-zero-to-mastery-with-hooks/
+
+
 import React, { useState, useContext } from "react";
-import { Colors, Button } from 'react-native-paper';
-import { Text, View } from "react-native";
+import { Button } from 'react-native-paper';
+import { Text } from "react-native";
 
 import {
   AccountBackground,
@@ -11,7 +15,7 @@ import {
   Title,
 } from "../components/account.styles";
 
-import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+import { AuthenticationContext } from '../../authentication/authentication.context';
 
 export const RegisterScreen = ({ navigation }) => {
 

@@ -1,7 +1,11 @@
+// Auth and login functions adapted from Udemy Course: Complete React Native in 2021 by Andrei Neagoie and Mo Binni
+// https://www.udemy.com/course/complete-react-native-mobile-development-zero-to-mastery-with-hooks/
+
 import React, { useState, createContext } from "react";
 import firebase from 'firebase/app';
 
 import { loginRequest } from "./authentication.service";
+
 
 export const AuthenticationContext = createContext();
 

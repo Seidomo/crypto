@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Appbar } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { View, Text, StyleSheet } from 'react-native'
 
@@ -20,9 +19,6 @@ export default function Top() {
   );
 }
 
-/* <Appbar.Header>
-<Appbar.Content title="Howdy" subtitle={'Team Crypto'} style={styles.background}/>
-</Appbar.Header> */
 
 const styles = StyleSheet.create({
     container: {
