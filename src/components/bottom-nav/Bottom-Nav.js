@@ -34,6 +34,7 @@ export default function Bottom() {
     
 
   return (
+    
     <BottomNavigation
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
@@ -42,11 +43,11 @@ export default function Bottom() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 5,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 5,
+//     backgroundColor: '#fff',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+// });

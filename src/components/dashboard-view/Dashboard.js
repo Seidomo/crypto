@@ -79,6 +79,13 @@ function Dashboard(props) {
 
 
   return (
+    <LinearGradient
+    colors={['#002244', '#A5acaf', 'transparent']}
+    style={styles.background}
+    start={{ x: 0, y: 0}}
+    end={{ x: 1, y: 1 }}
+    >
+    <ScrollView style={styles.scrollView}>
     <View style={styles.container}>
       <View>
         <Text>Add Currency to Collection</Text>
@@ -93,7 +100,6 @@ function Dashboard(props) {
           Add Crypto
         </Button>
       </View>
-      <ScrollView style={styles.scrollView}>
       {props.collection.prices.map((price, i) => {
         return <Surface style={stylesTwo.surface} key={i}>
           <Card.Title titleNumberOfLines={3} title={'$' + numberWithCommas(Number(price.price).toFixed(2))+ "\n" + price.currency}  left={(props) => <SvgUri uri={price.logo_url} height="40" width="40" />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => deleteItem(price.currency)} />} />
@@ -155,8 +161,9 @@ function Dashboard(props) {
             </Dialog>
           </Portal>
       <StatusBar style="auto" />
-      </ScrollView>
     </View>
+    </ScrollView>
+    </LinearGradient>
   );
 }
 
@@ -175,9 +182,15 @@ const stylesTwo = StyleSheet.create({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 1000,
   },
 });
 

@@ -23,7 +23,7 @@ export const LoginScreen = ({ navigation }) => {
   return (
     <AccountBackground>
       <AccountCover />
-      <Title>Crypto</Title>
+      <Title>Login</Title>
       <AccountContainer>
 
         <AuthInput

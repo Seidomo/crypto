@@ -14,7 +14,7 @@ export const AccountScreen = ({ navigation }) => {
   return (
     <AccountBackground>
       <AccountCover />
-      <Title>Crypto</Title>
+      <Title>Cryptik</Title>
 
       <AccountContainer>
         <Button
