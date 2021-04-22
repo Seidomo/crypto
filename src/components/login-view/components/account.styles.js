@@ -3,12 +3,13 @@ import { Button, TextInput } from 'react-native-paper';
 import { Text, View } from 'react-native';
 
 export const AccountBackground = styled.ImageBackground.attrs({
-  source: require("../../../../assets/coinsv.jpg"),
+/*   source: require("../../../../assets/coinsv.jpg"), */
 })`
   flex: 1;
   align-items: center;
   justify-content: center;
 `;
+
 
 export const AccountCover = styled.View`
   position: absolute;
@@ -29,11 +30,14 @@ export const AuthButton = styled.Button`
 `
 
 export const AuthInput = styled(TextInput)`
+  color: black;
+  background-color: #FFFFFF;
   width: 300px;
 `;
 
 export const Title = styled(Text)`
   font-size: 30px;
+  color: #FFFFFF;
 `;
 
 export const ErrorContainer = styled.View`
@@ -43,3 +47,8 @@ export const ErrorContainer = styled.View`
   margin-top: 8px;
   margin-bottom: 8px;
 `;
+
+/* primary: '#09FF00',
+accent: '#002244',
+background: '#002244',
+surface: '#A5acaf', */

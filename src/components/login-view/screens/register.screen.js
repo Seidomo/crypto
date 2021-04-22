@@ -6,7 +6,6 @@ import {
   AccountBackground,
   AccountCover,
   AccountContainer,
-  AuthButton,
   AuthInput,
   ErrorContainer,
   Title,
