@@ -3,7 +3,7 @@ import { Button, TextInput } from 'react-native-paper';
 import { Text, View } from 'react-native';
 
 export const AccountBackground = styled.ImageBackground.attrs({
-/*   source: require("../../../../assets/coinsv.jpg"), */
+  source: require("../../../../assets/levi-midnight-2OuUx9VDl74-unsplash.jpg")
 })`
   flex: 1;
   align-items: center;
@@ -31,12 +31,12 @@ export const AuthButton = styled.Button`
 
 export const AuthInput = styled(TextInput)`
   color: black;
-  background-color: #FFFFFF;
+  background-color: #A5acaf;
   width: 300px;
 `;
 
 export const Title = styled(Text)`
-  font-size: 30px;
+  font-size: 38px;
   color: #FFFFFF;
 `;
 
