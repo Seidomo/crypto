@@ -3,6 +3,7 @@ import axios from 'axios';
 let initialState = {
   currency : [],
   prices: [],
+  search: '',
 }
 
 
@@ -20,16 +21,30 @@ export default function collectionReducer(state = initialState, action){
       return {
         currency: state.currency,
         prices: payload,
+        search: state.search,
       };
     case "ADD_CURRENCY":
+      console.log('ADD CURRENCY', state.currency);
       return{
         currency: [...state.currency, payload.toUpperCase()],
         prices: state.prices,
+        search: state.search,
       };
       case "SET_INITIAL_CURRENCIES":
         return{
           currency: payload,
           prices: state.prices,
+          search: state.search,
+        }
+      case "SEARCH_CURRENCY":
+        if(Array.isArray(payload) && payload.length === 0){
+          payload = [{currency: ''}];
+        }
+        console.log('SEARCH CURRENCY CASE', state.currency);
+        return{
+          currency: state.currency,
+          prices: state.prices,
+          search: payload[0],
         }
       default:
         return state;
@@ -50,6 +65,19 @@ export const setTicker = (target) => {
     payload: target
   }
 }
+
+export const searchCurrency = (target) => (dispatch, getState) => {
+  if(target.length === 0){
+    target = 'emptyText';
+  }
+  return axios.get(`https://api.nomics.com/v1/currencies/ticker?key=911389757c5ae75d545c66e2995f4263&ids=${target}&interval=1d,30d&convert=USD&per-page=1&page=1`)
+    .then(response => {
+      dispatch({
+        type: 'SEARCH_CURRENCY',
+        payload: response.data
+      })
+    })
+  }
 
 export const loadPrices = () => (dispatch, getState) => {
   let collection = getState();
