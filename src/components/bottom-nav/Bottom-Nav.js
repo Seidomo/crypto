@@ -5,6 +5,7 @@ import { BottomNavigation } from 'react-native-paper';
 import Dashboard from '../dashboard-view/Dashboard.js'
 import { Provider } from 'react-redux';
 import store from '../../store/index.js';
+import { LogOut } from '../logout/logout'
 // import { AccountNavigator } from '../../components/navigation/account.navigator'
 // import { Navigation } from '../navigation/index';
 
@@ -13,7 +14,7 @@ const DashboardRoute = () => <Provider store={store()}><Dashboard /></Provider>;
 
 const SearchRoute = () => <Text>Search</Text>;
 
-const AccountRoute = () => <Text>Account</Text>;
+const AccountRoute = () => <LogOut />;
 
 export default function Bottom() {
 
