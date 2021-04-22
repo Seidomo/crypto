@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { Appbar, Searchbar, Button, Surface, Chip } from 'react-native-paper';
+import { Searchbar, Button, Surface, Chip } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { View, Text, StyleSheet } from 'react-native';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { connect } from 'react-redux';
-import { loadPrices, updateTicker, setTicker, searchCurrency } from '../../store/collection.reducer.js';
+import { connect} from 'react-redux';
+import { searchCurrency, updateTicker, loadPrices } from '../../store/collection.reducer.js';
 import { IfStart, startObject } from '../If/IfStart';
 import { IfSearch, searchFalse } from '../If/IfSearch';
 import { IfTarget, searchTrue } from '../If/IfTarget';
+import {SvgUri} from 'react-native-svg';
 
 
 function Search(props) {
@@ -16,8 +17,11 @@ function Search(props) {
   const [searchTarget, setSearchCurrency] = useState([]);
 
     const handleSubmit = () => {
-        storeData([...props.collection.currency, addCurrency]);
-        props.updateTicker(addCurrency);
+        console.log('BUTTON PRESS HANDLE SUBMIT', props.collection.currency);
+        // console.log(searchTarget);
+        storeData([...props.collection.currency, props.searchTarget.currency]);
+        props.updateTicker(props.searchTarget.currency);
+        // loadPrices();
       }
 
     const handleSearch = () => {
@@ -77,13 +81,13 @@ function Search(props) {
     <IfStart condition={startObject(props.searchTarget)}>
       <IfTarget condition={searchTrue(props.searchTarget)}>
       <View style={styles.chips}>
-          <Chip icon="information" onPress={() => console.log('Pressed')}>{props.searchTarget[0].currency}</Chip>
+          <Chip avatar={<SvgUri uri={props.searchTarget.logo_url} height="40" width="40" />} onPress={handleSubmit}>Add {props.searchTarget.currency} to Collection</Chip>
       </View>
       </IfTarget>
-    </IfStart>
-    <IfSearch condition={searchFalse(props.searchTarget)}>
+      <IfSearch condition={searchFalse(props.searchTarget)}>
       <Text>Cryptocurrency Not Found</Text>
     </IfSearch>
+    </IfStart>
     </View>
   );
 }
@@ -147,12 +151,15 @@ const styles = StyleSheet.create({
 
   const mapStateToProps = state => {
     return {
-      searchTarget: state.collection.search
+      searchTarget: state.collection.search,
+      collection: state.collection
     }
   }
 
   const mapDispatchToProps = {
-    searchCurrency
+    searchCurrency,
+    updateTicker,
+    loadPrices
   }
 
   export default connect(mapStateToProps, mapDispatchToProps)(Search);
