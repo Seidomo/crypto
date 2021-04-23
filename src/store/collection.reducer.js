@@ -24,20 +24,17 @@ export default function collectionReducer(state = initialState, action){
         search: state.search,
       };
     case "ADD_CURRENCY":
-      console.log('ADD CURRENCY', state.currency);
       return{
         currency: [...state.currency, payload.toUpperCase()],
         prices: state.prices,
         search: state.search,
       };
       case "SET_INITIAL_CURRENCIES":
-        console.log('INITIAL LOAD CURRENCIES',payload);
         const newObject = {
           currency: payload,
           prices: state.prices,
           search: state.search,
         };
-        console.log('NEW OBJECT',newObject);
         return{
           currency: payload,
           prices: state.prices,
@@ -47,7 +44,6 @@ export default function collectionReducer(state = initialState, action){
         if(Array.isArray(payload) && payload.length === 0){
           payload = [{currency: '', logo_url:''}];
         }
-        console.log('SEARCH CURRENCY CASE', state.currency);
         return{
           currency: state.currency,
           prices: state.prices,

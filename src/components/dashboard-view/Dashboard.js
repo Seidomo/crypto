@@ -59,7 +59,6 @@ function Dashboard(props) {
 
 
   useEffect(() => {
-    console.log('USE EFFECT', props.collection.currency);
     if(props.collection.currency.length > 0){
       props.loadPrices();
     }
@@ -76,7 +75,6 @@ function Dashboard(props) {
     props.setTicker(newCollection);
   }
 
-  // console.log(props.collection);
   return (
     <LinearGradient
     colors={['#002244', '#A5acaf', 'transparent']}

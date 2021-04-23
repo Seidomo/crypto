@@ -1,13 +1,11 @@
-import Dashboard from '../dashboard-view/Dashboard.js'
 import * as React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-import { AuthenticationContextProvider } from '../authentication/authentication.context';
 import Bottom from '../bottom-nav/Bottom-Nav.js';
 import 'firebase/firestore';
 import 'firebase/auth';
 import { StyleSheet } from 'react-native';
 import Top from '../top-nav/Top-nav.js'
-import { LinearGradient } from 'expo-linear-gradient';
+
 
 const theme = {
   ...DefaultTheme,

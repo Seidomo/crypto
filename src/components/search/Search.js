@@ -22,11 +22,8 @@ function Search(props) {
   const [searchTarget, setSearchCurrency] = useState([]);
 
     const handleSubmit = () => {
-        console.log('BUTTON PRESS HANDLE SUBMIT', props.collection.currency);
-        // console.log(searchTarget);
         storeData([...props.collection.currency, props.searchTarget.currency]);
         props.updateTicker(props.searchTarget.currency);
-        // loadPrices();
       }
 
     const handleSearch = () => {
