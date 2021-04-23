@@ -3,8 +3,6 @@ import * as React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { AuthenticationContextProvider } from '../authentication/authentication.context';
 import Bottom from '../bottom-nav/Bottom-Nav.js';
-import { Provider } from 'react-redux';
-import store from '../../store/index.js';
 import 'firebase/firestore';
 import 'firebase/auth';
 import { StyleSheet } from 'react-native';
@@ -28,9 +26,6 @@ export default function Main(){
     <PaperProvider theme={theme}>
       <Top />  
       <Bottom>
-      <Provider store={store()}>
-          <Dashboard />
-        </Provider>
       </Bottom>
     </PaperProvider>
   );

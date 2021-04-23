@@ -10,6 +10,8 @@ import { AccountScreen } from '../login-view/screens/account.screen'
 import { LoginScreen } from '../login-view/screens/login.screen'
 import { RegisterScreen } from '../login-view/screens/register.screen'
 
+
+
 const Stack = createStackNavigator();
 
 export const AccountNavigator = () => (

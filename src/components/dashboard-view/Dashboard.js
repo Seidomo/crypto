@@ -7,7 +7,7 @@ import { SvgUri } from 'react-native-svg';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Card, Title, IconButton, Surface, Button, Searchbar, Dialog, Portal, DataTable } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
-
+import { IfUri, checkUri } from '../If/IfUri';
 import { loadPrices, updateTicker, setTicker } from '../../store/collection.reducer.js';
 
 
@@ -59,6 +59,7 @@ function Dashboard(props) {
 
 
   useEffect(() => {
+    console.log('USE EFFECT', props.collection.currency);
     if(props.collection.currency.length > 0){
       props.loadPrices();
     }
@@ -75,7 +76,7 @@ function Dashboard(props) {
     props.setTicker(newCollection);
   }
 
-
+  // console.log(props.collection);
   return (
     <LinearGradient
     colors={['#002244', '#A5acaf', 'transparent']}
@@ -100,7 +101,7 @@ function Dashboard(props) {
       </View>
       {props.collection.prices.map((price, i) => {
         return <Surface style={stylesTwo.surface} key={i}>
-          <Card.Title titleNumberOfLines={3} title={'$' + numberWithCommas(Number(price.price).toFixed(2))+ "\n" + price.currency}  left={(props) => <SvgUri uri={price.logo_url} height="40" width="40" />} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => deleteItem(price.currency)} />} />
+          <Card.Title titleNumberOfLines={3} title={'$' + numberWithCommas(Number(price.price).toFixed(2))+ "\n" + price.currency}  left={(props) => <IfUri condition={checkUri(price)}><SvgUri uri={price.logo_url} height="40" width="40" /></IfUri>} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => deleteItem(price.currency)} />} />
           <Button onPress={() => showDialog(price.currency)}>Details</Button>
           </Surface>
         })}

@@ -9,6 +9,7 @@ import { searchCurrency, updateTicker, loadPrices } from '../../store/collection
 import { IfStart, startObject } from '../If/IfStart';
 import { IfSearch, searchFalse } from '../If/IfSearch';
 import { IfTarget, searchTrue } from '../If/IfTarget';
+import { IfUri, checkUri } from '../If/IfUri';
 import {SvgUri} from 'react-native-svg';
 
 
@@ -81,7 +82,7 @@ function Search(props) {
     <IfStart condition={startObject(props.searchTarget)}>
       <IfTarget condition={searchTrue(props.searchTarget)}>
       <View style={styles.chips}>
-          <Chip avatar={<SvgUri uri={props.searchTarget.logo_url} height="40" width="40" />} onPress={handleSubmit}>Add {props.searchTarget.currency} to Collection</Chip>
+          <Chip avatar={<IfUri condition={checkUri(props.searchTarget)}><SvgUri uri={props.searchTarget.logo_url} height="40" width="40" /></IfUri>} onPress={handleSubmit}>Add {props.searchTarget.currency} to Collection</Chip>
       </View>
       </IfTarget>
       <IfSearch condition={searchFalse(props.searchTarget)}>

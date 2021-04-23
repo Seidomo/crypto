@@ -8,8 +8,8 @@ import Search from '../search/Search.js';
 import { LogOut } from '../logout/logout'
 
 
-const DashboardRoute = () => <Provider store={store()}><Dashboard /></Provider>;
-const SearchRoute = () => <Provider store={store()}><Search /></Provider>;
+const DashboardRoute = () => <Dashboard />;
+const SearchRoute = () => <Search />;
 const AccountRoute = () => <LogOut />;
 
 export default function Bottom() {
