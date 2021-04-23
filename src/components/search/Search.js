@@ -15,6 +15,12 @@ import { SvgUri } from 'react-native-svg';
 
 function Search(props) {
 
+
+  const [visibleThree, setVisibleThree] = React.useState(false);
+
+  // const showModal = () => setVisibleTwo(true);
+  const hideModalTwo = () => setVisibleThree(false);
+
   const [visibleTwo, setVisibleTwo] = React.useState(false);
 
   // const showModal = () => setVisibleTwo(true);
@@ -34,10 +40,15 @@ function Search(props) {
     props.updateTicker(props.searchTarget.currency);
     // loadPrices();
     setVisibleTwo(false);
+    setVisibleThree(true);
   }
   
   const handleSubmitCancel = () => {
     setVisibleTwo(false);
+  }
+
+  const handleSubmitExit = () => {
+    setVisibleThree(false);
   }
 
   const handleSearch = () => {
@@ -114,6 +125,19 @@ function Search(props) {
                     <Button style={styles.modalButtonOne} onPress={handleSubmit}>Confirm</Button>
                     <Button style={styles.modalButtonTwo} onPress={handleSubmitCancel}>Cancel</Button>
                   </View>
+                </LinearGradient>
+              </Dialog>
+            </Portal>
+            <Portal>
+            <Dialog visible={visibleThree} onDismiss={hideModalTwo} style={styles.addModal}>
+                <LinearGradient
+                  colors={['#002244', '#A5acaf', 'transparent']}
+                  style={styles.backgroundTwo}
+                  start={{ x: 1, y: 0 }}
+                  end={{ x: 2, y: 3 }}
+                >
+                  <Dialog.Title style={styles.dialogTitleTwo}>Added to Collection!</Dialog.Title>
+                  <Button style={styles.modalButtonThree} onPress={handleSubmitExit}>Dismiss</Button>
                 </LinearGradient>
               </Dialog>
             </Portal>
@@ -226,6 +250,14 @@ const styles = StyleSheet.create({
   backgroundTwo: {
     borderRadius: 25,
     height: 170,
+  },
+  dialogTitleTwo: {
+    marginLeft: 85,
+    color: '#09FF00',
+    marginTop: 40,
+  },
+  modalButtonThree: {
+    marginTop: 20
   }
 });
 
