@@ -35,10 +35,8 @@ function Search(props) {
 
   const handleSubmit = () => {
     console.log('BUTTON PRESS HANDLE SUBMIT', props.collection.currency);
-    // console.log(searchTarget);
     storeData([...props.collection.currency, props.searchTarget.currency]);
     props.updateTicker(props.searchTarget.currency);
-    // loadPrices();
     setVisibleTwo(false);
     setVisibleThree(true);
   }
@@ -50,6 +48,7 @@ function Search(props) {
   const handleSubmitExit = () => {
     setVisibleThree(false);
   }
+
 
   const handleSearch = () => {
     props.searchCurrency(searchTarget);
