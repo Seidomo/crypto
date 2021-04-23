@@ -7,6 +7,9 @@ import 'firebase/auth';
 import { AuthenticationContextProvider } from './src/components/authentication/authentication.context';
 import { Navigation } from './src/components/navigation/index.js';
 
+import { Provider } from 'react-redux';
+import store from './src/store/index.js';
+
 
 const theme = {
   ...DefaultTheme,
@@ -36,12 +39,13 @@ if (!firebase.apps.length) {
 export default function App() {
 
   return (
-
+    <Provider store={store()}>
     <PaperProvider theme={theme}>
       <AuthenticationContextProvider>
         <Navigation/>
       </AuthenticationContextProvider>
     </PaperProvider>
+    </Provider>
 
   );
 }
