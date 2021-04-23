@@ -13,7 +13,7 @@ export default function Top() {
       start={{ x: 0, y: 0}}
       end={{ x: 1, y: 1 }}
       >
-    <Text style={styles.text}>Howdy User!</Text>
+    <Text style={styles.text}>Cryptik</Text>
     </LinearGradient>
   </View>
   );
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      marginLeft: '33%',
+      marginLeft: '41%',
       marginTop: '15%',
     },
   });

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
 import { SvgUri } from 'react-native-svg';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
 import { Card, Title, IconButton, Surface, Button, Searchbar, Dialog, Portal, DataTable } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { IfUri, checkUri } from '../If/IfUri';
@@ -84,21 +84,8 @@ function Dashboard(props) {
     start={{ x: 0, y: 0}}
     end={{ x: 1, y: 1 }}
     >
-    <ScrollView style={styles.scrollView}>
+    <ScrollView indicatorStyle="black">
     <View style={styles.container}>
-      <View>
-        <Text>Add Currency to Collection</Text>
-        <Searchbar
-          placeholder="Search"
-          onChangeText={text => setCurrency(text)} 
-          name="ticker"
-          type="text"
-          required
-        />
-        <Button mode="contained" onPress={handleSubmit}>
-          Add Crypto
-        </Button>
-      </View>
       {props.collection.prices.map((price, i) => {
         return <Surface style={stylesTwo.surface} key={i}>
           <Card.Title titleNumberOfLines={3} title={'$' + numberWithCommas(Number(price.price).toFixed(2))+ "\n" + price.currency}  left={(props) => <IfUri condition={checkUri(price)}><SvgUri uri={price.logo_url} height="40" width="40" /></IfUri>} right={(props) => <IconButton {...props} icon="trash-can-outline" onPress={() => deleteItem(price.currency)} />} />
@@ -109,7 +96,6 @@ function Dashboard(props) {
             <Dialog visible={visible} onDismiss={hideDialog}>
               <LinearGradient
               colors={['#09FF00', '#A5acaf', ]}
-              style={styles.background}
               start={{ x: 0, y: 0}}
               end={{ x: 1, y: 1 }}
               >
