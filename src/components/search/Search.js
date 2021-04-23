@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Searchbar, Button, Surface, Chip } from 'react-native-paper';
+import { Searchbar, Button, Surface, Chip, Snackbar } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { View, Text, StyleSheet } from 'react-native';
 import { useState } from 'react';
@@ -14,6 +14,10 @@ import {SvgUri} from 'react-native-svg';
 
 function Search(props) {
 
+  const [visible, setVisible] = React.useState(false);
+
+  const onDismissSnackBar = () => setVisible(false);
+
   const [searchTarget, setSearchCurrency] = useState([]);
 
     const handleSubmit = () => {
@@ -26,6 +30,7 @@ function Search(props) {
 
     const handleSearch = () => {
       props.searchCurrency(searchTarget);
+      setVisible(!visible);
     }
     
     
@@ -85,7 +90,19 @@ function Search(props) {
       </View>
       </IfTarget>
       <IfSearch condition={searchFalse(props.searchTarget)}>
-      <Text>Cryptocurrency Not Found</Text>
+      <Snackbar
+        style={styles.snackbar}
+        theme={{ colors: {surface: '#09FF00', accent: '#A5acaf', onSurface: '#002244'}}}
+        visible={visible}
+        onDismiss={onDismissSnackBar}
+        action={{
+          label: 'BACK',
+          onPress: () => {
+            // Do something
+          },
+        }}>
+                  Invalid Crypto Ticker... Try Again!
+      </Snackbar>
     </IfSearch>
     </IfStart>
     </View>
@@ -147,6 +164,10 @@ const styles = StyleSheet.create({
         height: 50,
         marginTop: 700
     },
+    snackbar: {
+      marginVertical: -30,
+      borderRadius: 25,
+    }
   });
 
   const mapStateToProps = state => {
